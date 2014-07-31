@@ -54,6 +54,11 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	protected String getValorFormatado() {
 
 		// TODO: Explicar o que este método está fazendo
+		/*
+		 * Retorna uma String com dez caracteres. Sendo o numero decimal
+		 * convertido em String (ou seja, sem a virgula) acrescido de zeros à
+		 * esquerda até o total de dez digitos.
+		 */
 		return String.format(
 				"%010d",
 				Long.valueOf(valor.setScale(2, RoundingMode.HALF_UP).toString()
@@ -178,6 +183,11 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 
 		// TODO: Estude a Math e escreva aqui o que este método está fazendo
 
+		/*
+		 * Retorna a diferença de dias entre a data final e data inicial. O
+		 * metodo getTime retorna a data em milisegundos. Como 86400000 é igual
+		 * a um dia, a divisão dará a diferença das datas em dias.
+		 */
 		return Math
 				.round((dataFinal.getTime() - dataInicial.getTime()) / 86400000D);
 	}
