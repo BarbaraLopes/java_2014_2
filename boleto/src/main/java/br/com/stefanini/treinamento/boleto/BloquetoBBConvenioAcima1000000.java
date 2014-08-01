@@ -17,7 +17,6 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 	@Override
 	protected void validaDados() throws ManagerException {
 
-		// TODO: COMPLETAR
 		if (codigoBanco == null || codigoBanco.length() != 3) {
 			throw new ManagerException(
 					"Código do Banco não informado ou com tamanho diferente de 3 posições");
@@ -89,8 +88,14 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 		init();
 
 		StringBuilder buffer = new StringBuilder();
-		
-		// TODO: COMPLETAR
+		buffer.append(codigoBanco);
+		buffer.append(codigoMoeda);
+		buffer.append(fatorVencimento);
+		buffer.append(getValorFormatado());
+		buffer.append(String.format("%06d", 0));
+		buffer.append(numeroConvenioBanco);
+		buffer.append(complementoNumeroConvenioBancoSemDV);
+		buffer.append(tipoCarteira);
 
 		return buffer.toString();
 	}
@@ -101,17 +106,25 @@ public class BloquetoBBConvenioAcima1000000 extends BloquetoBBImpl implements
 		init();
 
 		StringBuilder buffer = new StringBuilder();
-
-		// TODO: COMPLETAR
+		buffer.append(codigoBanco);
+		buffer.append(codigoMoeda);
+		buffer.append(digitoVerificadorCodigoBarras(getCodigoBarrasSemDigito()));
+		buffer.append(fatorVencimento);
+		buffer.append(getValorFormatado());
+		buffer.append(String.format("%06d", 0));
+		buffer.append(numeroConvenioBanco);
+		buffer.append(complementoNumeroConvenioBancoSemDV);
+		buffer.append(tipoCarteira);
 
 		return buffer.toString();
 	}
 
 	@Override
 	protected String getLDNumeroConvenio() {
-
-		return ""; // TODO: COMPLETAR;
-
+		String convenio = String.format("%07d",
+				Long.valueOf(numeroConvenioBanco));
+		return String.format("%s.%s", convenio.substring(0, 1),
+				convenio.substring(1, 5));
 	}
 
 }
