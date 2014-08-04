@@ -131,8 +131,41 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	protected int digitoVerificadorPorCampo(String campo, boolean valor) {
 		// TODO: COMPLETAR
-		//campo.replace
-		return 0;
+		String campo1 = campo.replace(".", "");
+		char[] array = campo1.toCharArray();
+		Integer n1 = 0;
+		int n2 = 0;
+		int n3 = 0;
+		int n4 = 0;
+		int soma = 0;
+		int mult = 2;
+		int result = 0;
+		int post = 0;
+		String ex = null;
+		for (int i = array.length - 1; i >= 0; i--) {
+			ex = String.valueOf(array[i]);
+			n1 = Integer.parseInt(ex);
+			n1 = n1 * mult;
+			if (mult == 2) {
+				mult = 1;
+			} else {
+				mult = 2;
+			}
+			if (n1 > 9) {
+				n2 = n1 % 10;
+				n4 = n1 / 10;
+				n3 = n4 % 10;
+				n1 = n2 + n3;
+			}
+			soma = soma + n1;
+		}
+		post = soma / 10;
+		post = (post * 10) + 10;
+		result = post - soma;
+		if (result == 10) {
+			result = 0;
+		}
+		return result;
 	}
 
 	/**
@@ -143,7 +176,30 @@ public abstract class BloquetoBBImpl implements BloquetoBB {
 	 */
 	protected int digitoVerificadorCodigoBarras(String codigoBarras) {
 		// TODO: COMPLETAR
-		return 0;
+		int mult = 2;
+		char[] array = codigoBarras.toCharArray();
+		int n1 = 0;
+		int n2 = 0;
+		int soma = 0;
+		int result = 0;
+		String ex = null;
+		for (int i = array.length - 1; i >= 0; i--) {
+			ex = String.valueOf(array[i]);
+			n1 = Integer.parseInt(ex);
+			n1 = n1 * mult;
+			if (mult + 1 == 10) {
+				mult = 2;
+			} else {
+				mult++;
+			}
+			soma = soma + n1;
+		}
+		n2 = soma % 11;
+		result = 11 - n2;
+		if ((result == 0) || (result == 10) || (result == 11)) {
+			result = 1;
+		}
+		return result;
 	}
 
 	/**
